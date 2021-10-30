@@ -5,8 +5,21 @@ import green from "@mui/material/colors/green";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
+import axios from "axios";
+import { useTodos } from "../../contexts/todo-context";
 
 export default function TodoItem({ todo }) {
+  const { todos, dispatch } = useTodos();
+  const onDeleteButtonClick = async () => {
+    const { status } = await axios.delete(
+      `http://localhost:5555/todos/${todo.id}`
+    );
+
+    if (status === 200) {
+      dispatch({ type: "DELETE_TODO", payload: { todoId: todo.id } });
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -25,7 +38,7 @@ export default function TodoItem({ todo }) {
           <IconButton sx={{ marginRight: 1 }} size="small" color="success">
             <CheckIcon />
           </IconButton>
-          <IconButton size="small">
+          <IconButton onClick={onDeleteButtonClick} size="small">
             <DeleteIcon />
           </IconButton>
         </Box>
