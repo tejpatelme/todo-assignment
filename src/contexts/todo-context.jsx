@@ -1,20 +1,23 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
+import todoReducer from "../reducers/todo-reducer";
 
 const TodoContext = createContext();
 
 export default function TodoContextProvider({ children }) {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    (async function () {
-      const { data } = await axios.get("http://localhost:5555/todos");
-      setTodos(data);
-    })();
-  }, []);
+  const [{ todos, openTodoCreateModal }, dispatch] = useReducer(todoReducer, {
+    openTodoCreateModal: false,
+    todos: [],
+  });
 
   return (
-    <TodoContext.Provider value={{ todos, setTodos }}>
+    <TodoContext.Provider value={{ todos, openTodoCreateModal, dispatch }}>
       {children}
     </TodoContext.Provider>
   );
