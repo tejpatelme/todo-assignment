@@ -12,6 +12,8 @@ import { useTodos } from "./contexts/todo-context";
 import Box from "@mui/system/Box";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
+import { Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 function App() {
   const { todos, dispatch, openTodoCreateModal } = useTodos();
@@ -42,7 +44,6 @@ function App() {
 
       <Box p={2} sx={{ maxWidth: "650px", margin: "auto" }}>
         <Header />
-
         <Button
           onClick={onCreateTaskClicked}
           variant="contained"
@@ -50,7 +51,14 @@ function App() {
         >
           Create Task
         </Button>
-
+        <Typography
+          mt={3}
+          variant="h6"
+          sx={{ fontWeight: 700 }}
+          color={grey[700]}
+        >
+          YOUR TODO'S • {todos.length}
+        </Typography>
         {todos.length > 0 ? <TodoListContainer /> : <EmptyTodoList />}
       </Box>
     </div>
