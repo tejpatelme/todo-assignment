@@ -4,7 +4,7 @@ import { useTodos } from "../../contexts/todo-context";
 import { grey, green } from "@mui/material/colors";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { IconButton, Typography } from "@mui/material";
+import { IconButton, Tooltip, Typography } from "@mui/material";
 
 export default function TodoItem({ todo }) {
   const { dispatch } = useTodos();
@@ -56,20 +56,29 @@ export default function TodoItem({ todo }) {
         </Typography>
 
         <Box sx={{ flexShrink: 0 }}>
-          <IconButton
-            onClick={onTodoCompleteClick}
-            sx={{
-              marginRight: 1,
-              backgroundColor: todo.completed && green[200],
-            }}
-            size="small"
-            color="success"
-          >
-            <CheckIcon />
-          </IconButton>
-          <IconButton onClick={onDeleteButtonClick} size="small" color="error">
-            <DeleteIcon />
-          </IconButton>
+          <Tooltip title="Mark Complete" arrow>
+            <IconButton
+              onClick={onTodoCompleteClick}
+              sx={{
+                marginRight: 1,
+                backgroundColor: todo.completed && green[200],
+              }}
+              size="small"
+              color="success"
+            >
+              <CheckIcon />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="Delete" arrow>
+            <IconButton
+              onClick={onDeleteButtonClick}
+              size="small"
+              color="error"
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
         </Box>
       </Box>
 
