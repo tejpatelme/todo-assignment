@@ -24,3 +24,7 @@ A simple todo application.
 - in a terminal run `npm run json-server` to start the mock server
 - in another terminal run `npm run dev` to start the development server
 - open `http://localhost:3000/` in the browser to use the application
+
+### More Info
+
+The json-server is mocked using the `db.json` file in the root folder. Any action like creating/deleting a todo, and updating a todo by marking it complete/incomplete is reflected in the `db.json` file and remains persistent.
