@@ -2,11 +2,11 @@ import "./App.css";
 import { useEffect } from "react";
 import axios from "axios";
 import {
-  TodoItem,
   TodoModal,
   ModalBg,
   EmptyTodoList,
   Header,
+  TodoListContainer,
 } from "./components";
 import { useTodos } from "./contexts/todo-context";
 import Box from "@mui/system/Box";
@@ -51,17 +51,7 @@ function App() {
           Create Task
         </Button>
 
-        {todos.length > 0 ? (
-          <Box mt={2}>
-            {[...todos]
-              .sort((a, b) => b.id - a.id)
-              .map((todo) => (
-                <TodoItem key={todo.id} todo={todo} />
-              ))}
-          </Box>
-        ) : (
-          <EmptyTodoList />
-        )}
+        {todos.length > 0 ? <TodoListContainer /> : <EmptyTodoList />}
       </Box>
     </div>
   );
