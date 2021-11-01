@@ -2,7 +2,8 @@ import axios from "axios";
 import Box from "@mui/system/Box";
 import { useTodos } from "../../contexts/todo-context";
 import { grey, green } from "@mui/material/colors";
-import { CheckIcon, DeleteIcon } from "@mui/icons-material";
+import CheckIcon from "@mui/icons-material/Check";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton, Typography } from "@mui/material";
 
 export default function TodoItem({ todo }) {
