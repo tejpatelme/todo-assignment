@@ -67,7 +67,7 @@ export default function TodoModal() {
         onChange={(e) => setTodo({ ...todo, description: e.target.value })}
         value={todo.description}
         sx={{ display: "block" }}
-        label="Enter todo description"
+        label="Enter task description"
         fullWidth
         multiline
         rows={4}
