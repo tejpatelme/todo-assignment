@@ -1,17 +1,17 @@
-import { TextField } from "@mui/material";
-import TextareaAutosize from "@mui/core/TextareaAutosize";
+import { useState } from "react";
+import axios from "axios";
 import { Box } from "@mui/system";
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { IconButton, TextField } from "@mui/material";
 import { useTodos } from "../../contexts/todo-context";
-import axios from "axios";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function TodoModal() {
   const [todo, setTodo] = useState({
     title: "",
     description: "",
   });
-  const { dispatch } = useTodos();
+  const { dispatch, openTodoCreateModal } = useTodos();
 
   const onCreateTodoClicked = async () => {
     if (todo.title.trim() === "") {
@@ -33,31 +33,44 @@ export default function TodoModal() {
     );
 
     dispatch({ type: "ADD_TODO", payload: { todo: data } });
-    setTodo({ title: "", description: "" });
+    dispatch({
+      type: "SHOW_TODO_CREATE_MODAL",
+      payload: openTodoCreateModal,
+    });
+  };
+
+  const onCloseModalClicked = () => {
+    dispatch({
+      type: "SHOW_TODO_CREATE_MODAL",
+      payload: openTodoCreateModal,
+    });
   };
 
   return (
     <Box sx={{ backgroundColor: "white", borderRadius: 1 }} p={1}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <IconButton size="small" onClick={onCloseModalClicked}>
+          <CloseIcon />
+        </IconButton>
+      </Box>
+
       <TextField
+        variant="outlined"
         onChange={(e) => setTodo({ ...todo, title: e.target.value })}
         value={todo.title}
-        sx={{ display: "block" }}
+        sx={{ display: "block", marginBottom: "1rem" }}
         fullWidth
-        variant="filled"
         label="Enter task title"
       />
-      <TextareaAutosize
+      <TextField
+        variant="outlined"
         onChange={(e) => setTodo({ ...todo, description: e.target.value })}
         value={todo.description}
-        style={{
-          padding: "1rem",
-          fontFamily: "inherit",
-          outline: "none",
-          border: "none",
-          fontSize: "1rem",
-        }}
-        placeholder="Enter todo description"
-        maxRows={4}
+        sx={{ display: "block" }}
+        label="Enter todo description"
+        fullWidth
+        multiline
+        rows={4}
       />
 
       <Box pt={2} sx={{ display: "flex", justifyContent: "flex-end" }}>

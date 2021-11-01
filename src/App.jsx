@@ -1,13 +1,11 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import Box from "@mui/system/Box";
-import TodoItem from "./components/TodoItem/TodoItem";
-import TodoModal from "./components/TodoModal/TodoModal";
-import ModalBg from "./components/ModalBg/ModalBg";
+import { TodoItem, TodoModal, ModalBg } from "./components";
 import { useTodos } from "./contexts/todo-context";
+import Box from "@mui/system/Box";
 import AddIcon from "@mui/icons-material/Add";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 
 function App() {
   const { todos, dispatch, openTodoCreateModal } = useTodos();
@@ -36,7 +34,7 @@ function App() {
         </ModalBg>
       )}
 
-      <Box p={2}>
+      <Box p={2} sx={{ maxWidth: "650px", margin: "auto" }}>
         <Button
           onClick={onCreateTaskClicked}
           variant="contained"
