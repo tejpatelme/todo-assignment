@@ -56,7 +56,10 @@ export default function TodoItem({ todo }) {
         </Typography>
 
         <Box sx={{ flexShrink: 0 }}>
-          <Tooltip title="Mark Complete" arrow>
+          <Tooltip
+            title={todo.completed ? "Mark Incomplete" : "Mark Complete"}
+            arrow
+          >
             <IconButton
               onClick={onTodoCompleteClick}
               sx={{
