@@ -1,7 +1,13 @@
 import "./App.css";
 import { useEffect } from "react";
 import axios from "axios";
-import { TodoItem, TodoModal, ModalBg } from "./components";
+import {
+  TodoItem,
+  TodoModal,
+  ModalBg,
+  EmptyTodoList,
+  Header,
+} from "./components";
 import { useTodos } from "./contexts/todo-context";
 import Box from "@mui/system/Box";
 import AddIcon from "@mui/icons-material/Add";
@@ -35,6 +41,8 @@ function App() {
       )}
 
       <Box p={2} sx={{ maxWidth: "650px", margin: "auto" }}>
+        <Header />
+
         <Button
           onClick={onCreateTaskClicked}
           variant="contained"
@@ -43,7 +51,7 @@ function App() {
           Create Task
         </Button>
 
-        {todos.length > 0 && (
+        {todos.length > 0 ? (
           <Box mt={2}>
             {[...todos]
               .sort((a, b) => b.id - a.id)
@@ -51,6 +59,8 @@ function App() {
                 <TodoItem key={todo.id} todo={todo} />
               ))}
           </Box>
+        ) : (
+          <EmptyTodoList />
         )}
       </Box>
     </div>

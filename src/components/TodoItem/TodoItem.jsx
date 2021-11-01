@@ -45,6 +45,7 @@ export default function TodoItem({ todo }) {
         border: 1,
         borderColor: grey[500],
         textDecoration: todo.completed ? "line-through" : "none",
+        backgroundColor: grey[100],
       }}
       p={1}
       mb={2}
@@ -54,7 +55,7 @@ export default function TodoItem({ todo }) {
           {todo.title}
         </Typography>
 
-        <Box>
+        <Box sx={{ flexShrink: 0 }}>
           <IconButton
             onClick={onTodoCompleteClick}
             sx={{
