@@ -21,6 +21,15 @@ export default function todoReducer(prevState, action) {
       };
     }
 
+    case "UPDATE_TODO": {
+      return {
+        ...prevState,
+        todos: prevState.todos.map((todo) =>
+          todo.id === action.payload.todoId ? action.payload.updatedTodo : todo
+        ),
+      };
+    }
+
     case "DELETE_TODO": {
       return {
         ...prevState,
